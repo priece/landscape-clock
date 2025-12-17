@@ -47,6 +47,18 @@ class CalendarView @JvmOverloads constructor(
         calendar.time = Date()
         today.time = Date()
 
+        // 计算月历总高度
+        val calendarHeight = calculateCalendarHeight()
+        
+        // 计算垂直偏移量，实现纵向居中
+        val verticalOffset = (height - calendarHeight) / 2f
+
+        // 保存画布状态
+        canvas.save()
+        
+        // 应用垂直偏移量
+        canvas.translate(0f, verticalOffset)
+
         // 绘制月份标题
         drawMonthTitle(canvas)
 
@@ -55,6 +67,9 @@ class CalendarView @JvmOverloads constructor(
 
         // 绘制日期网格
         drawDateGrid(canvas)
+
+        // 恢复画布状态
+        canvas.restore()
 
         // 每天重绘一次
         invalidate()
@@ -84,6 +99,23 @@ class CalendarView @JvmOverloads constructor(
             val y = cellSize * 1.7f
             canvas.drawText(weekDays[i], x, y, paint)
         }
+    }
+
+    private fun calculateCalendarHeight(): Float {
+        // 获取当月第一天是星期几
+        val tempCal = Calendar.getInstance()
+        tempCal.set(Calendar.DAY_OF_MONTH, 1)
+        val firstDayOfWeek = tempCal.get(Calendar.DAY_OF_WEEK) - 1
+        
+        // 获取当月天数
+        val daysInMonth = tempCal.getActualMaximum(Calendar.DAY_OF_MONTH)
+        
+        // 计算需要的行数（标题1行 + 星期1行 + 日期行数）
+        val totalCells = firstDayOfWeek + daysInMonth
+        val weeksNeeded = Math.ceil(totalCells / 7.0).toInt()
+        val totalRows = 2 + weeksNeeded // 标题 + 星期 + 日期周数
+        
+        return totalRows * cellSize
     }
 
     private fun drawDateGrid(canvas: Canvas) {
