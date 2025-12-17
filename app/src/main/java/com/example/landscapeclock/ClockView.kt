@@ -61,10 +61,10 @@ class ClockView @JvmOverloads constructor(
         canvas.drawCircle(centerX, centerY, radius, paint)
 
         // 只绘制简单的刻度线，不绘制数字和边框
-        paint.color = ResourcesCompat.getColor(resources, R.color.clockText, null)
         paint.style = Paint.Style.STROKE
 
         // 绘制小时刻度（简化版）
+        paint.color = ResourcesCompat.getColor(resources, R.color.clockTickMarks, null)
         for (i in 1..12) {
             val angle = Math.PI / 6 * (i - 3)
             
@@ -82,7 +82,8 @@ class ClockView @JvmOverloads constructor(
             canvas.drawLine(startX, startY, endX, endY, paint)
         }
 
-        // 绘制分钟刻度（简化版）
+        // 绘制分钟刻度（简化版）- 使用更暗的颜色
+        paint.color = ResourcesCompat.getColor(resources, R.color.clockSecondTickMarks, null)
         paint.strokeWidth = radius * 0.008f
         for (i in 1..60) {
             if (i % 5 != 0) {
@@ -93,6 +94,38 @@ class ClockView @JvmOverloads constructor(
                 val endY = centerY + Math.sin(angle).toFloat() * radius
                 canvas.drawLine(startX, startY, endX, endY, paint)
             }
+        }
+
+        // 绘制罗马数字 12、3、6、9
+        drawRomanNumerals(canvas)
+    }
+
+    private fun drawRomanNumerals(canvas: Canvas) {
+        paint.color = ResourcesCompat.getColor(resources, R.color.clockText, null)
+        paint.style = Paint.Style.FILL
+        paint.textSize = radius * 0.12f
+        paint.textAlign = Paint.Align.CENTER
+
+        // 罗马数字映射
+        val romanNumerals = mapOf(
+            12 to "XII",
+            3 to "III", 
+            6 to "VI",
+            9 to "IX"
+        )
+
+        // 绘制罗马数字
+        for ((hour, numeral) in romanNumerals) {
+            val angle = Math.PI / 6 * (hour - 3)
+            val x = centerX + Math.cos(angle).toFloat() * (radius * 0.78f)
+            val y = centerY + Math.sin(angle).toFloat() * (radius * 0.78f)
+            
+            // 调整文字基线，使其居中
+            val textBounds = android.graphics.Rect()
+            paint.getTextBounds(numeral, 0, numeral.length, textBounds)
+            val yOffset = textBounds.height() / 2f - textBounds.bottom
+            
+            canvas.drawText(numeral, x, y + yOffset, paint)
         }
     }
 
