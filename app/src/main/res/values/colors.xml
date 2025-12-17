@@ -10,13 +10,13 @@
     <color name="onBackground">#000000</color>
     <color name="surface">#FFFFFF</color>
     <color name="onSurface">#000000</color>
-    <color name="clockBackground">#FFFFFF</color>
-    <color name="clockText">#000000</color>
-    <color name="clockHourHand">#000000</color>
-    <color name="clockMinuteHand">#000000</color>
-    <color name="clockSecondHand">#FF0000</color>
-    <color name="calendarHeader">#2196F3</color>
-    <color name="calendarText">#000000</color>
-    <color name="calendarCurrentDay">#2196F3</color>
+    <color name="clockBackground">#000000</color>
+    <color name="clockText">#bfeff8</color>
+    <color name="clockHourHand">#bfeff8</color>
+    <color name="clockMinuteHand">#bfeff8</color>
+    <color name="clockSecondHand">#c75225</color>
+    <color name="calendarHeader">#c74224</color>
+    <color name="calendarText">#bfdff9</color>
+    <color name="calendarCurrentDay">#c53421</color>
     <color name="calendarCurrentDayText">#FFFFFF</color>
 </resources>

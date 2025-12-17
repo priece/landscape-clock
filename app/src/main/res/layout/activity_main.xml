@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:background="@color/background"
+    android:background="#000000"
     tools:context=".MainActivity">
 
     <!-- 左侧模拟时钟 -->
@@ -14,7 +14,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@color/surface"
+        android:background="#000000"
         android:padding="20dp" />
 
     <!-- 右侧月历 -->
@@ -23,7 +23,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@color/surface"
+        android:background="#000000"
         android:padding="20dp" />
 
 </LinearLayout>

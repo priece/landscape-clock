@@ -55,33 +55,26 @@ class ClockView @JvmOverloads constructor(
     }
 
     private fun drawClockFace(canvas: Canvas) {
-        // 绘制表盘背景
+        // 绘制表盘背景（黑底）
         paint.color = ResourcesCompat.getColor(resources, R.color.clockBackground, null)
         paint.style = Paint.Style.FILL
         canvas.drawCircle(centerX, centerY, radius, paint)
 
-        // 绘制表盘边框
+        // 只绘制简单的刻度线，不绘制数字和边框
         paint.color = ResourcesCompat.getColor(resources, R.color.clockText, null)
         paint.style = Paint.Style.STROKE
-        paint.strokeWidth = radius * 0.02f
-        canvas.drawCircle(centerX, centerY, radius, paint)
 
-        // 绘制刻度
-        paint.textSize = radius * 0.1f
-        paint.textAlign = Paint.Align.CENTER
-        paint.style = Paint.Style.FILL
-
+        // 绘制小时刻度（简化版）
         for (i in 1..12) {
             val angle = Math.PI / 6 * (i - 3)
-            val x = centerX + Math.cos(angle).toFloat() * (radius * 0.85f)
-            val y = centerY + Math.sin(angle).toFloat() * (radius * 0.85f)
-
-            // 绘制数字
-            canvas.drawText(i.toString(), x, y + paint.textSize / 3, paint)
-
-            // 绘制刻度线
-            paint.style = Paint.Style.STROKE
-            paint.strokeWidth = radius * 0.015f
+            
+            // 3、6、9、12位置的刻度线加粗
+            paint.strokeWidth = if (i % 3 == 0) {
+                radius * 0.025f  // 主刻度线更粗
+            } else {
+                radius * 0.015f  // 普通刻度线
+            }
+            
             val startX = centerX + Math.cos(angle).toFloat() * (radius * 0.9f)
             val startY = centerY + Math.sin(angle).toFloat() * (radius * 0.9f)
             val endX = centerX + Math.cos(angle).toFloat() * radius
@@ -89,7 +82,7 @@ class ClockView @JvmOverloads constructor(
             canvas.drawLine(startX, startY, endX, endY, paint)
         }
 
-        // 绘制分钟刻度
+        // 绘制分钟刻度（简化版）
         paint.strokeWidth = radius * 0.008f
         for (i in 1..60) {
             if (i % 5 != 0) {
