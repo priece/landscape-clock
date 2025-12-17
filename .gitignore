@@ -30,6 +30,7 @@ Thumbs.db
 
 # IDE-specific files
 .vscode/
+.trae/
 
 # Built application files
 *.apk
