@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#2196F3</color>
+    <color name="primaryVariant">#1976D2</color>
+    <color name="onPrimary">#FFFFFF</color>
+    <color name="secondary">#FFC107</color>
+    <color name="secondaryVariant">#FFA000</color>
+    <color name="onSecondary">#000000</color>
+    <color name="background">#F5F5F5</color>
+    <color name="onBackground">#000000</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="onSurface">#000000</color>
+    <color name="clockBackground">#FFFFFF</color>
+    <color name="clockText">#000000</color>
+    <color name="clockHourHand">#000000</color>
+    <color name="clockMinuteHand">#000000</color>
+    <color name="clockSecondHand">#FF0000</color>
+    <color name="calendarHeader">#2196F3</color>
+    <color name="calendarText">#000000</color>
+    <color name="calendarCurrentDay">#2196F3</color>
+    <color name="calendarCurrentDayText">#FFFFFF</color>
+</resources>
