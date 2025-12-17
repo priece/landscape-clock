@@ -4,8 +4,13 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.ProcessLifecycleOwner
 
 class MainActivity : AppCompatActivity() {
+
+    private var isKeepScreenOn = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +31,26 @@ class MainActivity : AppCompatActivity() {
         
         // 设置屏幕常亮
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        isKeepScreenOn = true
+        
+        // 监听应用生命周期，在退到后台时清除屏幕常亮
+        ProcessLifecycleOwner.get().lifecycle.addObserver(LifecycleEventObserver { _, event ->
+            when (event) {
+                Lifecycle.Event.ON_STOP -> {
+                    // 应用退到后台，清除屏幕常亮
+                    if (isKeepScreenOn) {
+                        window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+                    }
+                }
+                Lifecycle.Event.ON_START -> {
+                    // 应用回到前台，重新设置屏幕常亮
+                    if (isKeepScreenOn) {
+                        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+                    }
+                }
+                else -> {}
+            }
+        })
         
         setContentView(R.layout.activity_main)
         
@@ -36,5 +61,25 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         // 清理资源（如果有）
+        // 清除屏幕常亮标志
+        if (isKeepScreenOn) {
+            window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        }
+    }
+    
+    override fun onPause() {
+        super.onPause()
+        // 当Activity暂停时（如按Home键），清除屏幕常亮
+        if (isKeepScreenOn) {
+            window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        }
+    }
+    
+    override fun onResume() {
+        super.onResume()
+        // 当Activity恢复时，重新设置屏幕常亮
+        if (isKeepScreenOn) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        }
     }
 }
