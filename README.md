@@ -1,47 +1,84 @@
-# Landscape Clock - 横屏模拟时钟
+# Landscape Clock
 
-一个Android横屏模拟时钟应用，支持横屏显示模拟时钟和日历。
+An Android landscape analog clock application with calendar integration, designed for horizontal screen display.
 
-## 功能特点
-- 横屏显示模拟时钟
-- 集成日历功能
-- 自定义时钟界面
-- 响应式设计
+## Features
+- **Analog Clock Display**: Beautiful landscape-oriented analog clock
+- **Calendar Integration**: Built-in calendar functionality
+- **Custom Clock Interface**: Customizable clock face with Roman numerals
+- **Screen Always-On**: Keeps screen awake for continuous time display
+- **Responsive Design**: Optimized for horizontal screen orientation
+- **Enhanced Visuals**: Hour marks remain bright, second ticks dimmed for better readability
 
-## 技术栈
-- Kotlin
-- Android SDK 33
-- Gradle 8.4
-- Material Design
+## Screenshots
+*Screenshots to be added*
 
-## 构建和运行
+## Technical Stack
+- **Language**: Kotlin
+- **Platform**: Android SDK 33
+- **Build Tool**: Gradle 8.4
+- **UI**: Material Design, Custom Views
+- **Min SDK**: 24 (Android 7.0+)
+- **Target SDK**: 33
+
+## Build and Run
 ```bash
+# Build the project
 ./gradlew build
+
+# Install debug version
 ./gradlew installDebug
+
+# Or use Android Studio
+# Open project in Android Studio and click Run
 ```
 
-## 项目结构
+## Project Structure
 ```
 app/
 ├── src/main/
 │   ├── java/com/example/landscapeclock/
-│   │   ├── MainActivity.kt
-│   │   ├── ClockView.kt
-│   │   └── CalendarView.kt
+│   │   ├── MainActivity.kt          # Main activity with fullscreen setup
+│   │   ├── ClockView.kt             # Custom analog clock view
+│   │   └── CalendarView.kt          # Calendar component
 │   ├── res/
 │   │   ├── layout/
 │   │   ├── drawable/
 │   │   ├── values/
+│   │   │   └── colors.xml           # Color definitions
 │   │   └── xml/
 │   └── AndroidManifest.xml
-├── build.gradle.kts
+├── build.gradle.kts                   # App-level build configuration
 └── ...
 ```
 
-## 开发环境要求
-- Android Studio
-- JDK 17
-- Android SDK 33
+## Development Requirements
+- **IDE**: Android Studio (latest version recommended)
+- **JDK**: JDK 17 or higher
+- **Android SDK**: API level 33
+- **Git**: For version control
 
-## 许可证
-MIT License
+## Recent Updates (v1.0.3)
+- ✅ Added screen always-on functionality
+- ✅ Added Roman numerals at 12, 3, 6, 9 positions
+- ✅ Reduced brightness of second tick marks
+- ✅ Enhanced visual hierarchy
+
+## Roadmap
+- [ ] Add multiple clock themes
+- [ ] Add world clock functionality
+- [ ] Add alarm features
+- [ ] Add weather integration
+- [ ] Add more customization options
+
+## Contributing
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+MIT License - see [LICENSE](LICENSE) file for details.
+
+---
+**[中文文档](README.zh-CN.md)** | English
+
+## Download
+*Download links to be added when available on app stores*
